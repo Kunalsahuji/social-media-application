@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Social</title>
+    <link rel="icon" href="https://cdn-icons-png.freepik.com/256/1968/1968750.png?semt=ais_hybrid">
+    <link rel='stylesheet' href='/stylesheets/style.css' />
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://cdn.jsdelivr.net/npm/remixicon@4.2.0/fonts/remixicon.css" rel="stylesheet" />
+
+</head>
+
+<body>
+    <nav class=" flex gap-x-10 font-semibold justify-center text-center text-xl">
+      <%  if(user){ %> 
+        <a class="hover:bg-gray-200 block rounded-xl p-3" href="/profile">Homepage</a>
+        <a class="hover:bg-gray-200 block rounded-xl p-3" href="timeline">Timeline</a>
+        <% } else{ %>
+        <a class="hover:bg-gray-200 block rounded-xl p-3" href="/">Homepage</a>
+        <a class="hover:bg-gray-200 block rounded-xl p-3" href="/login">Login</a>
+        <% }%>
+        <a class="hover:bg-gray-200 block rounded-xl p-3" href="/about">About Us</a>
+    </nav>

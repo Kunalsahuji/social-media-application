@@ -1,0 +1,28 @@
+<%- include('partials/header') %>
+    <div class=" rounded-xl w-[80%] m-auto mt-3">
+        <h1 class="bg-gray-200 w-[50%] rounded-xl p-8 m-auto text-center text-5xl font-extrabold text-purple-400">
+            Login User
+        </h1>
+
+        <form class="mt-[5%] m-auto text-center" action="/login-user" method="post">
+            <input class="w-[30%] mb-10 border border-zinc-500 p-3 rounded-xl text-xl" type="text"
+                placeholder="enter username" name="username">
+            <br><br>
+            <input class="w-[30%] mb-10 border border-zinc-500 p-3 rounded-xl text-xl" type="password" name="password"
+                placeholder="password">
+            <br><br>
+            <p class="w-[30%] m-auto text-center">
+                <a class="text-purple-400 text-center hover:text-purple-600" href="/forget-email">forget password ?</a>
+            </p>
+            <button
+                class="mt-5 text-center block w-[30%] m-auto hover:bg-purple-600 rounded-xl text-white py-3 px-5 bg-purple-400">Login</button>
+
+        </form>
+
+
+        <p class="w-[40%] text-center m-auto mt-3">
+            Don't have an account ? <a class="text-purple-400 hover:text-purple-600" href="/register">register</a>
+        </p>
+    </div>
+
+    <%- include('partials/footer') %>

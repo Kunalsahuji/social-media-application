@@ -1,0 +1,52 @@
+<%- include('partials/header') %>
+    <div class="rounded-xl w-[80%] pt-[2%] m-auto flex flex-wrap">
+
+        <div class="card w-[23%] mr-5 mb-5">
+            <div class="flex items-center mb-2">
+                <img class="w-[7vh] h-[7vh] rounded-full object-cover"
+                    src="https://avatars.githubusercontent.com/u/75199419?v=4" alt="img">
+                <div>
+                    <h1 class="ml-3 font-bold text-xl">name</h1>
+                    <small class="text-zinc-600">date-time</small>
+                </div>
+            </div>
+            <img class="w-full h-[40vh] object-cover" src="https://avatars.githubusercontent.com/u/75199419?v=4"
+                alt="img">
+            <div class="text-2xl flex gap-x-5 mt-1">
+                <i class="ri-heart-3-line"></i>
+                <i class="ri-chat-3-line"></i>
+            </div>
+        </div>
+
+        <div class="card w-[23%] mr-5 mb-5">
+            <div class="flex items-center mb-2">
+                <img class="w-[7vh] h-[7vh] rounded-full object-cover"
+                    src="https://avatars.githubusercontent.com/u/90328713?v=4" alt="img">
+                <div class="ml-3">
+                    <h1 class="text-xl font-bold">name</h1>
+                    <small class="text-zinc-600">date-time</small>
+                </div>
+            </div>
+            <img class="w-full h-[40vh] object-cover" src="https://avatars.githubusercontent.com/u/90328713?v=4"
+                alt="img">
+            <div class="text-2xl flex gap-x-5 mt-1">
+                <i class="ri-heart-3-line"></i>
+                <i class="ri-chat-3-line"></i>
+            </div>
+        </div>
+
+
+    </div>
+
+    <div
+        class=" flex justify-around items-center rounded-xl fixed left-[50%] bottom-[5%] translate-x-[-50%] w-[30%] py-3  bg-purple-300 text-2xl text-white hover:bg-purple-600 ">
+        <i class="ri-search-line cursor-pointer"></i>
+        <i class="ri-add-large-line cursor-pointer"></i>
+        <a href="/update-user/<%= user._id%>">
+            <i class="cursor-pointer"> <img class="w-[4vh] h-[4vh] rounded-full object-contain border border-zinc-950"
+                    src="/images/<%= user.profilePic %>" alt="Profile_DP"></i>
+        </a>
+    </div>
+
+
+    <%- include('partials/footer') %>
