@@ -2,8 +2,8 @@
 
   <div class="flex rounded-xl w-[100%] pt-[1%] m-auto">
 
-    <div class="w-[50%] m-auto rounded-xl mr-5">
-      <div class="w-full pt-[3%] m-auto p-5 flex">
+    <div class="w-[55%]  rounded-xl mr-[2%]">
+      <div class="w-[100%] pt-[3%] m-auto p-5 flex">
 
         <form class="formImage hidden" action="/image/<%=user._id %>" method="post" enctype="multipart/form-data">
           <input class="inputImage" type="file" name="profilePic">
@@ -14,7 +14,7 @@
               src="/images/<%= user.profilePic %>" alt="profilePic">
           </div>
 
-          <div class="w-[20%] m-auto ml-7">
+          <div class="w-[45%] m-auto ml-10 ">
             <h1 class="text-2xl font-extrabold text-purple-400 m-auto ">
               <%= user.name%>
             </h1>
@@ -45,7 +45,7 @@
       </form>
     </div>
 
-    <div class="w-[25%] h-[10%] bg-gray-200 text-center border rounded-full px-5">
+    <div class="w-[35%] h-[10%] bg-gray-200 text-center border rounded-full px-5 mt-[10%]">
       <h1 class="rounded-xl text-2xl font-extrabold text-red-400 mt-5 underline">
         Profile Setting
       </h1>

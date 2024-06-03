@@ -1,0 +1,47 @@
+<%- include('partials/header') %>
+    <div class="rounded-xl w-[80%] pt-[2%] m-auto flex flex-wrap">
+
+        <% user.posts.forEach((post)=> { %>
+            <div class="card w-[23%] mr-5 mb-5">
+                <div class="flex items-center mb-2">
+                    <img class="w-[7vh] h-[7vh] rounded-full object-cover" src="/images/<%= user.profilePic %>"
+                        alt="profilePic">
+                    <div class="ml-3">
+                        <h1 class="font-bold text-xl">
+                            <%= user.name %>
+                        </h1>
+                        <small class="text-zinc-600">
+                            <%=post.createdAt.toLocaleDateString() %> | <%=post.createdAt.toLocaleTimeString() %>
+                        </small>
+                    </div>
+                </div>
+                <img class="w-full h-[40vh] object-cover" src="/images/<%= post.media %>" alt="postMedia">
+                <!-- <div class="text-2xl flex gap-x-5 mt-1">
+                    <i class="ri-heart-3-line"></i>
+                    <i class="ri-chat-3-line"></i>
+                </div> -->
+                <div class="flex justify-between items-center mt-1">
+                    <div class="flex items-center">
+                        <span class="text-md mr-2">
+                            <%= post.likes.length %>
+                        </span>
+                        <a class="text-2xl" href="/like/<%= post._id %>">
+                            <% if(post.likes.includes(user._id)) { %>
+                                <i class="ri-heart-3-fill text-red-300"></i>
+                                <% } else { %>
+                                    <i class="ri-heart-3-line"></i>
+
+                                    <% } %>
+                        </a>
+                    </div>
+
+                    <div class="text-2xl">
+                        <a href="/update-post/<%= post._id %>"> <i class="text-blue-300 ri-edit-box-line"></i></a>
+                        <a href="/delete-post/<%= post._id %>"><i class="text-red-300 ri-delete-bin-4-line"></i></a>
+                    </div>
+                </div>
+            </div>
+            <% }) %>
+    </div>
+
+    <%- include('partials/footer') %>

@@ -29,7 +29,7 @@ const userSchema = new mongoose.Schema({
         match: [/^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/, 'Please fill a valid email address']
     },
     password: String,
-    posts: [{ type: mongoose.SchemaTypes.ObjectId, ref: "post" }],
+    posts: [{ type: mongoose.Schema.Types.ObjectId, ref: "post" }],
     resetPasswordToken: {
         type: Number,
         default: 0,

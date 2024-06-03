@@ -3,8 +3,10 @@ var router = express.Router();
 
 const path = require('path');
 const fs = require('fs');
-const upload = require('../utils/multer').single("profilePic");
+// const upload = require('../utils/multer').single("profilePic");
+const upload = require('../utils/multer')
 const User = require('../model/userModel')
+const Post = require('../model/postModel')
 const passport = require('passport');
 const LocalStrategy = require('passport-local');
 const sendmail = require("../utils/mail")
@@ -53,7 +55,7 @@ router.post('/register-user', async function (req, res, next) {
     // await newUser.save()
     // res.redirect('/login',);
   } catch (error) {
-    // console.log(error)
+    console.log(error)
     res.send(error.message)
   }
 });
@@ -65,28 +67,23 @@ router.get('/forget-user', function (req, res, next) {
 router.get('/about', function (req, res, next) {
   res.render('about', { user: req.user });
 });
-router.get('/profile', isLoggedIn, async (req, res, next) => {
-  // const user = await User.findById(req)
-  console.log(req.user)
-  res.render('profile', { user: req.user });
-});
+
 
 
 router.get('/logout-user/:id', isLoggedIn, function (req, res, next) {
   req.logout(() => {
     res.redirect('/login')
   })
-
 });
 
 router.get('/update-user/:id', isLoggedIn, function (req, res, next) {
-  console.log(req.user)
   res.render('update-user', { user: req.user });
 });
 router.post('/update-user/:id', isLoggedIn, async (req, res, next) => {
   try {
     const id = req.params.id
     await User.findByIdAndUpdate(id, req.body)
+    console.log(`Updated User: ${req.user}`)
 
     // console.log(req.user)
     // res.render('update-user', { user: req.user });
@@ -168,10 +165,15 @@ router.post('/forget-password/:id', async function (req, res, next) {
 router.get('/delete-user/:id', isLoggedIn, async (req, res, next) => {
   try {
     const id = req.params.id
-    const deleteUser = await User.findByIdAndDelete(id)
-    if (deleteUser.profilePic !== "Default.png") {
-      fs.unlinkSync(path.join(__dirname, "..", "public", "images", deleteUser.profilePic))
+    const deletedUser = await User.findByIdAndDelete(id)
+    if (deletedUser.profilePic !== "Default.png") {
+      fs.unlinkSync(path.join(__dirname, "..", "public", "images", deletedUser.profilePic))
     }
+    deletedUser.posts.forEach(async (postid) => {
+      const deletedPost = await Post.findByIdAndDelete(postid)
+      console.log(`deletedPost : ${deletedPost}`)
+      fs.unlinkSync(path.join(__dirname, "..", "public", "images", deletedPost.media))
+    })
     res.redirect("/login")
   } catch (error) {
     console.log(error)
@@ -179,8 +181,92 @@ router.get('/delete-user/:id', isLoggedIn, async (req, res, next) => {
   }
 });
 
+router.get('/profile', isLoggedIn, async (req, res, next) => {
+  // const user = await User.findById(req)
+  // console.log(req.user)
+  // res.render('profile', { user: req.user });
+  try {
+    const posts = await Post.find().populate("user")
+    console.log(`Profile:-- user: ${req.user}\npost: ${posts}`)
+    res.render('profile', { user: req.user, posts });
+  } catch (error) {
+    console.log(error.message)
+    res.send(error)
+  }
+});
 
-router.post("/image/:id", isLoggedIn, upload, async (req, res, next) => {
+router.get('/timeline', isLoggedIn, async (req, res, next) => {
+
+  try {
+    res.render('timeline', { user: await req.user.populate("posts") });
+  } catch (error) {
+    console.log(error.message)
+    res.send(error)
+  }
+});
+router.get('/delete-post/:id', isLoggedIn, async (req, res, next) => {
+  try {
+    const deletepost = await Post.findByIdAndDelete(req.params.id)
+    fs.unlinkSync(path.join(__dirname, "..", 'public', 'images', deletepost.media))
+    res.redirect('/timeline')
+  } catch (error) {
+    console.log(error)
+    res.send(error)
+  }
+})
+router.get('/update-post/:id', isLoggedIn, async (req, res, next) => {
+  try {
+    const post = await Post.findById(req.params.id)
+    res.render('update-post', { user: req.user, post })
+  } catch (error) {
+    console.log(error)
+    res.send(error)
+  }
+})
+
+router.post('/update-post/:pid', isLoggedIn, async (req, res, next) => {
+  const post = await Post.findByIdAndUpdate(req.params.pid, req.body)
+  // res.redirect(`/update-post/${req.params.pid}`)
+  res.redirect(`/timeline`)
+
+})
+
+router.post('/post-image/:pid', isLoggedIn, upload.single("media"), async (req, res, next) => {
+  try {
+    const post = await Post.findById(req.params.pid)
+    fs.unlinkSync(path.join(__dirname, "..", "public", "images", post.media))
+    post.media = req.file.filename
+    await post.save()
+    res.redirect(`/update-post/${req.params.pid}`)
+    // res.redirect(`/timeline${req.params.pid}`)
+  } catch (error) {
+    console.log(error)
+    res.send(error)
+  }
+})
+router.get('/create-post/', isLoggedIn, (req, res, next) => {
+  res.render('create-post', { user: req.user })
+})
+
+router.post('/create-post/', isLoggedIn, upload.single("media"), async (req, res, next) => {
+  try {
+    const newPost = new Post({
+      media: req.file.filename,
+      title: req.body.title,
+      user: req.user._id,
+    })
+
+    req.user.posts.push(newPost._id)
+    await newPost.save()
+    await req.user.save()
+    console.log(`Post Create:-- user: ${req.user}\npost: ${newPost}`)
+    res.redirect('/profile')
+  } catch (error) {
+    console.log(error)
+    res.send(error)
+  }
+})
+router.post("/image/:id", isLoggedIn, upload.single("profilePic"), async (req, res, next) => {
   try {
     if (req.user.profilePic !== "Default.png") {
       fs.unlinkSync(path.join(__dirname, "..", "public", "images", req.user.profilePic))
@@ -190,6 +276,23 @@ router.post("/image/:id", isLoggedIn, upload, async (req, res, next) => {
     res.redirect(`/update-user/${req.params.id}`)
   } catch (error) {
     console.log(error.message)
+    res.send(error)
+  }
+})
+
+router.get('/like/:postid', isLoggedIn, async (req, res, next) => {
+  try {
+    const post = await Post.findById(req.params.postid)
+    if (post.likes.includes(req.user._id)) {
+      post.likes = post.likes.filter((uid) => uid != req.user.id)
+    }
+    else {
+      post.likes.push(req.user.id)
+    }
+    await post.save()
+    res.redirect('/profile')
+  } catch (error) {
+    console.log(error)
     res.send(error)
   }
 })
