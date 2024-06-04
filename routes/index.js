@@ -297,4 +297,21 @@ router.get('/like/:postid', isLoggedIn, async (req, res, next) => {
   }
 })
 
+router.get('/likes/:postid', isLoggedIn, async (req, res, next) => {
+  try {
+    const post = await Post.findById(req.params.postid)
+    if (post.likes.includes(req.user._id)) {
+      post.likes = post.likes.filter((uid) => uid != req.user.id)
+    }
+    else {
+      post.likes.push(req.user.id)
+    }
+    await post.save()
+    res.redirect('/timeline')
+  } catch (error) {
+    console.log(error)
+    res.send(error)
+  }
+})
+
 module.exports = router;

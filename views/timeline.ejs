@@ -25,7 +25,7 @@
                         <span class="text-md mr-2">
                             <%= post.likes.length %>
                         </span>
-                        <a class="text-2xl" href="/like/<%= post._id %>">
+                        <a class="text-2xl" href="/likes/<%= post._id %>">
                             <% if(post.likes.includes(user._id)) { %>
                                 <i class="ri-heart-3-fill text-red-300"></i>
                                 <% } else { %>
