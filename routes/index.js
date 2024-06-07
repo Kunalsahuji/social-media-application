@@ -171,7 +171,7 @@ router.get('/delete-user/:id', isLoggedIn, async (req, res, next) => {
     }
     deletedUser.posts.forEach(async (postid) => {
       const deletedPost = await Post.findByIdAndDelete(postid)
-      console.log(`deletedPost : ${deletedPost}`)
+      // console.log(`deletedPost : ${deletedPost}`)
       fs.unlinkSync(path.join(__dirname, "..", "public", "images", deletedPost.media))
     })
     res.redirect("/login")
