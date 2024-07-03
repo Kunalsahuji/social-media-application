@@ -24,7 +24,7 @@ router.get('/login', function (req, res, next) {
 
 router.post('/login-user',
   passport.authenticate("local", {
-    successRedirect: "/profile",
+    successRedirect: "/",
     failureRedirect: "/login"
   }),
   function (req, res, next) {
@@ -49,7 +49,7 @@ router.post('/register-user', async function (req, res, next) {
     await User.register(
       { name, username, email }, password
     )
-    res.redirect('/login',);
+    res.redirect('/',);
 
     // const newUser = new User(req.body)
     // await newUser.save()
