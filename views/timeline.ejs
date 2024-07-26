@@ -1,4 +1,12 @@
 <%- include('partials/header') %>
+    <div class="flex items-center gap-5 bg-gray-50 w-[25%] rounded-full">
+        <h1
+            class="flex justify-center items-center w-[75%] rounded-2xl text-center text-2xl font-extrabold text-zinc-600 ">
+            <%= user.username  %>' Timeline
+        </h1>
+        <img class="w-[12vh] h-[12vh] object-cover rounded-full" src="/images/<%= user.profilePic %>" alt="postMedia">
+    </div>
+    <hr class="m-auto w-full border rounded-2xl mt-2 mb-5">
     <div class="rounded-xl w-[80%] pt-[2%] m-auto flex flex-wrap">
 
         <% user.posts.forEach((post)=> { %>

@@ -1,8 +1,35 @@
 <%- include('partials/header') %>
-    <div class="rounded-xl w-[80%] pt-[2%] m-auto flex flex-wrap">
+
+
+
+    <div class="flex items-center justify-between  w-[100%] rounded-full m-auto">
+        <div class="flex items-center justify-center gap-5 m-auto bg-gray-200 rounded-full py-1 px-4">
+            <h1 class="flex justify-center items-center rounded-2xl text-center text-2xl font-extrabold text-zinc-600 ">
+                Welcome <%= user.username %>
+            </h1>
+            <img class="w-[10vh] h-[10vh] -mr-4 object-cover rounded-full" src="/images/<%= user.profilePic %>"
+                alt="postMedia">
+        </div>
+
+        <div class=" flex justify-around items-center rounded-xl  w-[30%] py-3">
+            <a href="/create-post"
+                class="flex justify-center items-center rounded-full border border-zinc-500 bg-purple-300 px-6 py-3 gap-4 hover:bg-purple-500 text-xl">
+                <i class="ri-add-large-line cursor-pointer"> create-post</i>
+            </a>
+            <a href="/update-user/<%= user._id%>">
+                <i
+                    class="cursor-pointer text-xl flex justify-center items-center rounded-full border border-zinc-500 bg-purple-300 px-3 py-2 gap-4 hover:bg-purple-500">
+                    <img class="w-[5vh] h-[5vh] rounded-full object-contain border border-zinc-950"
+                        src="/images/<%= user.profilePic %>" alt="Profile_DP">update-profile</i>
+            </a>
+        </div>
+    </div>
+
+    <hr class="m-auto w-full border rounded-2xl mt-2 mb-5">
+    <div class="rounded-xl w-[100%]  m-auto flex flex-wrap">
 
         <% posts.forEach((post)=> { %>
-            <div class="card w-[23%] mr-5 mb-5">
+            <div class="card w-[19%] mr-5 mb-5">
                 <div class="flex items-center mb-2">
                     <img class="w-[7vh] h-[7vh] rounded-full object-cover" src="/images/<%= post.user.profilePic %>"
                         alt="profilePic">
@@ -16,53 +43,44 @@
                     </div>
                 </div>
                 <img class="w-full h-[40vh] object-cover" src="/images/<%= post.media %>" alt="postMedia">
-                <div class="flex items-center mt-1">
-                    <span class="text-md mr-2">
+                <div class="flex items-center mt-1 w-full gap-5">
+                    <span class="text-md -mr-2">
                         <%= post.likes.length %>
                     </span>
-                    <a class="text-2xl" href="/like/<%= post._id %>">
+                    <a class="text-2xl " href="/like/<%= post._id %>">
                         <% if(post.likes.includes(user._id)) { %>
                             <i class="text-red-300 ri-heart-3-fill"></i>
                             <% } else { %>
                                 <i class="ri-heart-3-line"></i>
                                 <% } %>
                     </a>
+                    <div class="underline">
+
+                        <%= post.title %>
+                    </div>
                     <!-- <i class="ri-chat-3-line"></i> -->
                 </div>
             </div>
-<% }) %>
-
-            <!-- <div class="card w-[23%] mr-5 mb-5">
-                <div class="flex items-center mb-2">
-                    <img class="w-[7vh] h-[7vh] rounded-full object-cover"
-                        src="https://avatars.githubusercontent.com/u/90328713?v=4" alt="img">
-                    <div class="ml-3">
-                        <h1 class="text-xl font-bold">name</h1>
-                        <small class="text-zinc-600">date-time</small>
-                    </div>
-                </div>
-                <img class="w-full h-[40vh] object-cover" src="https://avatars.githubusercontent.com/u/90328713?v=4"
-                    alt="img">
-                <div class="text-2xl flex gap-x-5 mt-1">
-                    <i class="ri-heart-3-line"></i>
-                    <i class="ri-chat-3-line"></i>
-                </div>
-            </div> -->
-
+            <% }) %>
 
     </div>
+    <!-- <i class="ri-search-line cursor-pointer"></i> -->
 
-    <div
-        class="flex justify-around items-center rounded-xl fixed left-[50%] bottom-[5%] translate-x-[-50%] w-[30%] py-3  bg-purple-300 text-2xl text-white hover:bg-purple-600">
-        <!-- <i class="ri-search-line cursor-pointer"></i> -->
-        <a href="/create-post">
-            <i class="ri-add-large-line cursor-pointer"></i>
+    <!-- <div
+        class="flex justify-around items-center rounded-xl fixed left-[50%] bottom-[5%] translate-x-[-50%] w-[30%] py-3">
+        <a href="/create-post"
+            class="flex justify-center items-center rounded-full border border-zinc-500 bg-purple-300 px-6 py-3 gap-4 hover:bg-purple-500 text-xl">
+            <i class="ri-add-large-line cursor-pointer"> create-post</i>
         </a>
         <a href="/update-user/<%= user._id%>">
-            <i class="cursor-pointer"> <img class="w-[4vh] h-[4vh] rounded-full object-contain border border-zinc-950"
-                    src="/images/<%= user.profilePic %>" alt="Profile_DP"></i>
+            <i
+                class="cursor-pointer text-xl flex justify-center items-center rounded-full border border-zinc-500 bg-purple-300 px-3 py-2 gap-4 hover:bg-purple-500">
+                <img class="w-[5vh] h-[5vh] rounded-full object-contain border border-zinc-950"
+                    src="/images/<%= user.profilePic %>" alt="Profile_DP">update-profile</i>
         </a>
-    </div>
+    </div> -->
+
+
 
 
     <%- include('partials/footer') %>

@@ -14,7 +14,7 @@ passport.use(new LocalStrategy(User.authenticate()))
 
 
 /* GET home page. */
-router.get('/', function (req, res, next) {
+router.get('/', isLoggedIn, (req, res, next) => {
   res.render('index', { user: req.user });
 });
 
@@ -49,7 +49,7 @@ router.post('/register-user', async function (req, res, next) {
     await User.register(
       { name, username, email }, password
     )
-    res.redirect('/',);
+    res.redirect('/login',);
 
     // const newUser = new User(req.body)
     // await newUser.save()
