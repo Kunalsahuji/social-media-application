@@ -1,51 +1,59 @@
 <%- include('partials/header') %>
-    <div class="flex items-center gap-5 bg-gray-50 w-[25%] rounded-full">
-        <h1
-            class="flex justify-center items-center w-[75%] rounded-2xl text-center text-2xl font-extrabold text-zinc-600 ">
-            <%= user.username  %>' Timeline
+    <!-- Timeline Header -->
+    <div class="flex items-center justify-start  px-2 py-3 rounded-lg shadow-lg mb-2 w-full">
+        <h1 class="text-center text-xl font-bold w-[25%] flex items-center justify-center">
+            <%= user.username %>'s Timeline
         </h1>
-        <img class="w-[12vh] h-[12vh] object-cover rounded-full" src="/images/<%= user.profilePic %>" alt="postMedia">
+        <img class="w-10 h-10 object-cover rounded-full border-2 border-white shadow-md"
+            src="/images/<%= user.profilePic %>" alt="Profile Picture">
     </div>
-    <hr class="m-auto w-full border rounded-2xl mt-2 mb-5">
-    <div class="rounded-xl w-[80%] pt-[2%] m-auto flex flex-wrap">
 
+    <!-- Divider -->
+    <!-- <hr class="w-full border-t border-gray-300 rounded-2xl mb-6"> -->
+
+    <!-- Posts Section -->
+    <div class="w-full max-w-6xl mx-auto px-4 flex flex-wrap gap-6">
         <% user.posts.forEach((post)=> { %>
-            <div class="card w-[23%] mr-5 mb-5">
-                <div class="flex items-center mb-2">
-                    <img class="w-[7vh] h-[7vh] rounded-full object-cover" src="/images/<%= user.profilePic %>"
-                        alt="profilePic">
+            <div class="card w-full md:w-1/4 bg-white rounded-lg shadow-lg overflow-hidden">
+                <!-- Post Header -->
+                <div class="flex items-center p-4 border-b border-gray-200">
+                    <img class="w-12 h-12 rounded-full object-cover border border-gray-300"
+                        src="/images/<%= user.profilePic %>" alt="Profile Picture">
                     <div class="ml-3">
-                        <h1 class="font-bold text-xl">
+                        <h1 class="text-lg font-bold text-gray-800">
                             <%= user.name %>
                         </h1>
-                        <small class="text-zinc-600">
-                            <%=post.createdAt.toLocaleDateString() %> | <%=post.createdAt.toLocaleTimeString() %>
+                        <small class="text-gray-600">
+                            <%= post.createdAt.toLocaleDateString() %> | <%= post.createdAt.toLocaleTimeString() %>
                         </small>
                     </div>
                 </div>
-                <img class="w-full h-[40vh] object-cover" src="/images/<%= post.media %>" alt="postMedia">
-                <!-- <div class="text-2xl flex gap-x-5 mt-1">
-                    <i class="ri-heart-3-line"></i>
-                    <i class="ri-chat-3-line"></i>
-                </div> -->
-                <div class="flex justify-between items-center mt-1">
-                    <div class="flex items-center">
-                        <span class="text-md mr-2">
+
+                <!-- Post Image -->
+                <img class="w-full h-64 object-cover" src="/images/<%= post.media %>" alt="Post Image">
+
+                <!-- Post Actions -->
+                <div class="p-4 flex justify-between items-center">
+                    <div class="flex items-center space-x-2">
+                        <span class="text-md text-gray-700">
                             <%= post.likes.length %>
                         </span>
-                        <a class="text-2xl" href="/likes/<%= post._id %>">
+                        <a href="/likes/<%= post._id %>" class="text-2xl">
                             <% if(post.likes.includes(user._id)) { %>
-                                <i class="ri-heart-3-fill text-red-300"></i>
+                                <i class="ri-heart-3-fill text-red-500"></i>
                                 <% } else { %>
                                     <i class="ri-heart-3-line"></i>
-
                                     <% } %>
                         </a>
                     </div>
-
-                    <div class="text-2xl">
-                        <a href="/update-post/<%= post._id %>"> <i class="text-blue-300 ri-edit-box-line"></i></a>
-                        <a href="/delete-post/<%= post._id %>"><i class="text-red-300 ri-delete-bin-4-line"></i></a>
+                    <div class="flex gap-x-4 text-2xl">
+                        <i class="ri-chat-3-line"></i>
+                        <a href="/update-post/<%= post._id %>" class="text-blue-500">
+                            <i class="ri-edit-box-line"></i>
+                        </a>
+                        <a href="/delete-post/<%= post._id %>" class="text-red-500">
+                            <i class="ri-delete-bin-4-line"></i>
+                        </a>
                     </div>
                 </div>
             </div>

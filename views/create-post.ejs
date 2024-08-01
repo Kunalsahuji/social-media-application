@@ -1,21 +1,22 @@
 <%- include('partials/header') %>
-    <div class=" rounded-xl w-[80%] m-auto mt-3">
-        <h1 class="bg-gray-200 w-[50%] rounded-xl p-8 m-auto text-center text-5xl font-extrabold text-purple-400">Create
-            Post
+    <div class="bg-white bg-opacity-90 rounded-2xl w-full max-w-md mx-auto p-8 shadow-lg mt-32">
+        <h1 class="bg-blue-200 w-full rounded-xl p-4 text-center text-3xl font-extrabold text-purple-600">
+            Create Post
         </h1>
 
-        <form class="mt-[5%] m-auto text-center" action="/create-post" method="post" enctype="multipart/form-data">
-            <input class="w-[30%] mb-10 border border-zinc-500 p-3 rounded-xl text-xl" type="file" name="media">
-            <br><br>
-            <input class="w-[30%] mb-10 border border-zinc-500 p-3 rounded-xl text-xl" type="text" name="title"
-                placeholder="Ennter Post Title">
-
+        <form class="mt-6" action="/create-post" method="post" enctype="multipart/form-data">
+            <div class="mb-6">
+                <input class="w-full border border-gray-300 p-3 rounded-xl text-xl" type="file" name="media">
+            </div>
+            <div class="mb-6">
+                <input class="w-full border border-gray-300 p-3 rounded-xl text-xl" type="text" name="title"
+                    placeholder="Enter Post Title">
+            </div>
             <button
-                class="mt-5 text-center block w-[30%] m-auto hover:bg-purple-600 rounded-xl text-white py-3 px-5 bg-purple-400">Create
-                Post</button>
-
+                class="w-full text-center bg-purple-400 hover:bg-purple-600 rounded-xl text-white py-3 px-5 transition duration-300 ease-in-out transform hover:scale-105">
+                Create Post
+            </button>
         </form>
-
     </div>
 
     <%- include('partials/footer') %>
