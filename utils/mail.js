@@ -1,21 +1,19 @@
 const nodemailer = require("nodemailer");
-
+const {EMAIL_ID, PASS, ADDRESS} = process.env
 const sendmail = async (res, user, url) => {
     try {
-        // const url = `http://localhost:3000/forget-password/${user._id}`;
-
         const transport = nodemailer.createTransport({
             service: "gmail",
             host: "smtp.gmail.com",
             port: 465,
             auth: {
-                user: "ksahu1318@gmail.com",
-                pass: "rtdytivceqkpptju",
+                user: EMAIL_ID,
+                pass: PASS,
             },
         });
 
         const mailOptions = {
-            from: "Social Media Private Limited",
+            from: ADDRESS,
             to: user.email,
             subject: "Password Reset Link",
             text: "Do not share this link to anyone",
@@ -30,9 +28,6 @@ const sendmail = async (res, user, url) => {
 
             user.resetPasswordToken = 1;
             await user.save();
-
-            // res.send(
-            //     `<h1 class="text-5xl text-center mt-5 bg-red-300">Check your inbox/spam.</h1>`);
             res.send( `<h1 style="text-align:center; margin-top: 20px; color: tomato;">Check Inbox/Spam</h1>`)
         });
     } catch (error) {

@@ -4,16 +4,16 @@ var path = require('path');
 var cookieParser = require('cookie-parser');
 var logger = require('morgan');
 
-var indexRouter = require('./routes/index');
-var usersRouter = require('./routes/users');
+var userRouter = require('./routes/user');
+var profileRouter = require('./routes/profile');
 var app = express();
 
-const db = require('./model/connect');
+const connectDB = require('./config/connect');
 const passport = require('passport');
 const session = require('express-session');
 const User = require('./model/userModel')
-
-
+require('dotenv').config()
+connectDB()
 
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));
@@ -37,9 +37,9 @@ passport.serializeUser(User.serializeUser())
 passport.deserializeUser(User.deserializeUser())
 
 
-app.use('/', indexRouter);
-app.use('/users', usersRouter);
-
+app.use('/', userRouter);
+app.use('/', profileRouter);
+ 
 
 
 // catch 404 and forward to error handler
