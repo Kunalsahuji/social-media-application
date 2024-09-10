@@ -1,4 +1,5 @@
 const nodemailer = require("nodemailer");
+require('dotenv').config();
 const {EMAIL_ID, PASS, ADDRESS} = process.env
 const sendmail = async (res, user, url) => {
     try {

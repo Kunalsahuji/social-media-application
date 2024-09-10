@@ -8,6 +8,7 @@ const Post = require('../model/postModel')
 const passport = require('passport');
 const LocalStrategy = require('passport-local');
 const sendmail = require("../utils/mail")
+require('dotenv').config();
 passport.use(new LocalStrategy(User.authenticate()))
 
 
