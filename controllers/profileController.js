@@ -24,7 +24,6 @@ const getProfile = async (req, res, next) => {
     try {
         const posts = await Post.find().populate("user")
         posts.forEach((elem) => {
-            console.log(`ye mera h ${elem.user.username}`)
         })
         res.render('profile', { user: req.user, posts });
     } catch (error) {
@@ -93,7 +92,6 @@ const postCreatePost = async (req, res, next) => {
         req.user.posts.push(newPost._id)
         await newPost.save()
         await req.user.save()
-        console.log(`Post Create:-- user: ${req.user}\npost: ${newPost}`)
         res.redirect('/profile')
     } catch (error) {
         console.log(error)

@@ -74,7 +74,6 @@ const postUpdateUser = async (req, res, next) => {
         const id = req.params.id
         await User.findByIdAndUpdate(id, req.body)
         req.user.save()
-        console.log(`Updated User: ${req.user}`)
         res.redirect('/profile')
     } catch (error) {
         res.send(error)
@@ -108,11 +107,9 @@ const postForgetEmail = async (req, res, next) => {
         const user = await User.findOne({ email: req.body.forgetEmail })
         if (user) {
             const url = `${req.protocol}://${req.get("host")}/forget-password/${user._id}`
-            console.log(`url = ${url}`)
             sendmail(res, user, url)
         }
         else {
-            console.log("ye error h")
             res.redirect("/forget-email")
         }
     } catch (error) {
@@ -151,7 +148,6 @@ const deleteUser = async (req, res, next) => {
         }
         deletedUser.posts.forEach(async (postid) => {
             const deletedPost = await Post.findByIdAndDelete(postid)
-            // console.log(`deletedPost : ${deletedPost}`)
             fs.unlinkSync(path.join(__dirname, "..", "public", "images", deletedPost.media))
         })
         res.redirect("/login")
