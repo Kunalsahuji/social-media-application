@@ -1,18 +1,18 @@
 <%- include('partials/header') %>
-    <div class="flex items-center justify-center h-[90vh]">
 
-        <div
-            class="bg-cover bg-white bg-opacity-90 rounded-2xl w-full md:w-3/5 lg:w-2/5 h-[60vh] border border-zinc-500 flex flex-col items-center justify-center p-8 shadow-lg">
-            <h1 class="text-center text-3xl font-extrabold text-purple-600 px-4 mt-5">Welcome to Social Media 🤗</h1>
-            <p class="text-center text-lg text-gray-700 mt-4 mb-8">Connect with friends and the world around you.</p>
-            <div class="flex flex-wrap justify-center gap-4">
-                <a class="hover:bg-purple-700 rounded-full text-white py-3 px-6 bg-purple-500 transition duration-300 ease-in-out transform hover:scale-105"
-                    href="/login">Start your Journey Today!</a>
-                <a class="hover:bg-purple-700 rounded-full text-white py-3 px-6 bg-purple-500 transition duration-300 ease-in-out transform hover:scale-105"
-                    href="/register">Register</a>
-                <a class="hover:bg-purple-700 rounded-full text-white py-3 px-6 bg-purple-500 transition duration-300 ease-in-out transform hover:scale-105"
-                    href="/profile">Profile</a>
-            </div>
+<div class="flex items-center justify-center h-[90vh] px-4 sm:px-0"> 
+    <div class="bg-cover bg-white bg-opacity-90 rounded-2xl w-full sm:w-4/5 md:w-3/5 lg:w-2/5 h-auto sm:h-[60vh] border border-zinc-500 flex flex-col items-center justify-center p-8 shadow-lg">
+        <h1 class="text-center text-2xl sm:text-3xl font-extrabold text-purple-600 px-4 mt-5">Welcome to Social Media 🤗</h1>
+        <p class="text-center text-base sm:text-lg text-gray-700 mt-4 mb-6 sm:mb-8">Connect with friends and the world around you.</p>
+        <div class="flex flex-wrap justify-center gap-4 mt-4">
+            <a class="hover:bg-purple-700 rounded-full text-white py-2 sm:py-3 px-5 sm:px-6 bg-purple-500 transition duration-300 ease-in-out transform hover:scale-105"
+                href="/login">Start your Journey Today!</a>
+            <a class="hover:bg-purple-700 rounded-full text-white py-2 sm:py-3 px-5 sm:px-6 bg-purple-500 transition duration-300 ease-in-out transform hover:scale-105"
+                href="/register">Register</a>
+            <a class="hover:bg-purple-700 rounded-full text-white py-2 sm:py-3 px-5 sm:px-6 bg-purple-500 transition duration-300 ease-in-out transform hover:scale-105"
+                href="/profile">Profile</a>
         </div>
     </div>
-    <%- include('partials/footer') %>
+</div>
+
+<%- include('partials/footer') %>

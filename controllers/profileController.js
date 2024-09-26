@@ -24,8 +24,6 @@ const isLoggedIn = (req, res, next) => {
 const getProfile = async (req, res, next) => {
     try {
         const posts = await Post.find().populate("user")
-        posts.forEach((elem) => {
-        })
         res.render('profile', { user: req.user, posts });
     } catch (error) {
         console.log(error.message)

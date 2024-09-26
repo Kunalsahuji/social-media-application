@@ -1,63 +1,61 @@
 <%- include('partials/header') %>
-    <!-- Timeline Header -->
-    <div class="flex items-center justify-start  px-2 py-3 rounded-lg shadow-lg mb-2 w-full">
-        <h1 class="text-center text-xl font-bold w-[25%] flex items-center justify-center">
-            <%= user.username %>'s Timeline
-        </h1>
-        <img class="w-10 h-10 object-cover rounded-full border-2 border-white shadow-md"
-            src="/images/<%= user.profilePic %>" alt="Profile Picture">
-    </div>
 
-    <!-- Divider -->
-    <!-- <hr class="w-full border-t border-gray-300 rounded-2xl mb-6"> -->
+<!-- Timeline Header -->
+<div class="flex items-center justify-start px-4 py-3 rounded-lg shadow-lg mb-6 w-full max-w-6xl mx-auto bg-white">
+    <h1 class="text-center text-lg sm:text-xl font-bold w-1/3 sm:w-1/4 flex items-center justify-center">
+        <%= user.username %>'s Timeline
+    </h1>
+    <img class="w-8 sm:w-10 h-8 sm:h-10 object-cover rounded-full border-2 border-white shadow-md"
+        src="/images/<%= user.profilePic %>" alt="Profile Picture">
+</div>
 
-    <!-- Posts Section -->
-    <div class="w-full max-w-6xl mx-auto px-4 flex flex-wrap gap-6">
-        <% user.posts.forEach((post)=> { %>
-            <div class="card w-full md:w-1/4 bg-white rounded-lg shadow-lg overflow-hidden">
-                <!-- Post Header -->
-                <div class="flex items-center p-4 border-b border-gray-200">
-                    <img class="w-12 h-12 rounded-full object-cover border border-gray-300"
-                        src="/images/<%= user.profilePic %>" alt="Profile Picture">
-                    <div class="ml-3">
-                        <h1 class="text-lg font-bold text-gray-800">
-                            <%= user.name %>
-                        </h1>
-                        <small class="text-gray-600">
-                            <%= post.createdAt.toLocaleDateString() %> | <%= post.createdAt.toLocaleTimeString() %>
-                        </small>
-                    </div>
-                </div>
-
-                <!-- Post Image -->
-                <img class="w-full h-64 object-cover" src="/images/<%= post.media %>" alt="Post Image">
-
-                <!-- Post Actions -->
-                <div class="p-4 flex justify-between items-center">
-                    <div class="flex items-center space-x-2">
-                        <span class="text-md text-gray-700">
-                            <%= post.likes.length %>
-                        </span>
-                        <a href="/likes/<%= post._id %>" class="text-2xl">
-                            <% if(post.likes.includes(user._id)) { %>
-                                <i class="ri-heart-3-fill text-red-500"></i>
-                                <% } else { %>
-                                    <i class="ri-heart-3-line"></i>
-                                    <% } %>
-                        </a>
-                    </div>
-                    <div class="flex gap-x-4 text-2xl">
-                        <i class="ri-chat-3-line"></i>
-                        <a href="/update-post/<%= post._id %>" class="text-blue-500">
-                            <i class="ri-edit-box-line"></i>
-                        </a>
-                        <a href="/delete-post/<%= post._id %>" class="text-red-500">
-                            <i class="ri-delete-bin-4-line"></i>
-                        </a>
-                    </div>
+<!-- Posts Section -->
+<div class="w-full max-w-6xl mx-auto px-4 sm:px-6 flex flex-wrap gap-6">
+    <% user.posts.forEach((post)=> { %>
+        <div class="card w-full sm:w-1/2 md:w-1/3 lg:w-1/4 bg-white rounded-lg shadow-lg overflow-hidden">
+            <!-- Post Header -->
+            <div class="flex items-center p-4 border-b border-gray-200">
+                <img class="w-10 h-10 sm:w-12 sm:h-12 rounded-full object-cover border border-gray-300"
+                    src="/images/<%= user.profilePic %>" alt="Profile Picture">
+                <div class="ml-3">
+                    <h1 class="text-md sm:text-lg font-bold text-gray-800">
+                        <%= user.name %>
+                    </h1>
+                    <small class="text-gray-600">
+                        <%= post.createdAt.toLocaleDateString() %> | <%= post.createdAt.toLocaleTimeString() %>
+                    </small>
                 </div>
             </div>
-            <% }) %>
-    </div>
 
-    <%- include('partials/footer') %>
+            <!-- Post Image -->
+            <img class="w-full h-48 sm:h-64 object-cover" src="/images/<%= post.media %>" alt="Post Image">
+
+            <!-- Post Actions -->
+            <div class="p-4 flex justify-between items-center">
+                <div class="flex items-center space-x-2">
+                    <span class="text-md text-gray-700">
+                        <%= post.likes.length %>
+                    </span>
+                    <a href="/likes/<%= post._id %>" class="text-2xl">
+                        <% if (post.likes.includes(user._id)) { %>
+                            <i class="ri-heart-3-fill text-red-500"></i>
+                        <% } else { %>
+                            <i class="ri-heart-3-line"></i>
+                        <% } %>
+                    </a>
+                </div>
+                <div class="flex gap-x-4 text-2xl">
+                    <i class="ri-chat-3-line"></i>
+                    <a href="/update-post/<%= post._id %>" class="text-blue-500">
+                        <i class="ri-edit-box-line"></i>
+                    </a>
+                    <a href="/delete-post/<%= post._id %>" class="text-red-500">
+                        <i class="ri-delete-bin-4-line"></i>
+                    </a>
+                </div>
+            </div>
+        </div>
+    <% }) %>
+</div>
+
+<%- include('partials/footer') %>

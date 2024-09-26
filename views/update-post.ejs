@@ -1,50 +1,50 @@
 <%- include('partials/header') %>
 
-    <div class="w-full max-w-2xl bg-white rounded-xl shadow-lg p-6 mt-5 m-auto">
-        <!-- Profile Header -->
-        <div class="flex items-center mb-6">
-            <div class="flex-shrink-0">
-                <img class="w-24 h-24 rounded-full object-cover border-2 border-gray-300"
-                    src="/images/<%= user.profilePic %>" alt="Profile Picture">
-            </div>
-            <div class="ml-6">
-                <h1 class="text-2xl font-extrabold text-purple-400">
-                    <%= user.name %>
-                </h1>
-                <h2 class="text-xl font-bold text-purple-400">@<%= user.username %>
-                </h2>
-            </div>
+<div class="w-full max-w-2xl bg-white rounded-xl shadow-lg p-6 mt-5 mx-auto">
+    <!-- Profile Header -->
+    <div class="flex items-center mb-6">
+        <div class="flex-shrink-0">
+            <img class="w-20 h-20 sm:w-24 sm:h-24 rounded-full object-cover border-2 border-gray-300"
+                src="/images/<%= user.profilePic %>" alt="Profile Picture">
         </div>
-
-        <!-- Update Post Form -->
-        <h1 class="text-2xl font-bold text-purple-400 text-center mb-4">Update Post</h1>
-        <form class="postImage hidden" action="/post-image/<%= post._id %>" method="post" enctype="multipart/form-data">
-            <input class="inputPostImage" type="file" name="media">
-        </form>
-        <form action="/update-post/<%= post._id %>" method="post" class="space-y-4 flex flex-col justify-center items-center">
-            <div class="relative">
-                <img class="previewPostImage w-full h-64 rounded-2xl object-cover cursor-pointer"
-                    src="/images/<%= post.media %>" alt="Post Image">
-            </div>
-            <input class="w-full md:w-1/2 border border-gray-300 p-3 rounded-md text-xl" type="text" name="title"
-                placeholder="Enter Post Title" value="<%= post.title %>">
-            <button class="w-full md:w-1/2 bg-purple-400 hover:bg-purple-600 text-white py-3 px-5 rounded-md">Update
-                Post</button>
-        </form>
+        <div class="ml-4 sm:ml-6">
+            <h1 class="text-xl sm:text-2xl font-extrabold text-purple-400">
+                <%= user.name %>
+            </h1>
+            <h2 class="text-lg sm:text-xl font-bold text-purple-400">@<%= user.username %></h2>
+        </div>
     </div>
 
-    <script>
-        const inputPostImage = document.querySelector(".inputPostImage");
-        const previewPostImage = document.querySelector(".previewPostImage");
-        const postImage = document.querySelector(".postImage");
+    <!-- Update Post Form -->
+    <h1 class="text-2xl font-bold text-purple-400 text-center mb-4">Update Post</h1>
 
-        previewPostImage.addEventListener("click", () => {
-            inputPostImage.click();
-        });
+    <form class="postImage hidden" action="/post-image/<%= post._id %>" method="post" enctype="multipart/form-data">
+        <input class="inputPostImage" type="file" name="media">
+    </form>
 
-        inputPostImage.addEventListener("change", () => {
-            postImage.submit();
-        });
-    </script>
+    <form action="/update-post/<%= post._id %>" method="post" class="space-y-4 flex flex-col justify-center items-center">
+        <div class="relative">
+            <img class="previewPostImage w-full h-48 sm:h-64 rounded-2xl object-cover cursor-pointer"
+                src="/images/<%= post.media %>" alt="Post Image">
+        </div>
+        <input class="w-full md:w-2/3 border border-gray-300 p-3 rounded-md text-lg sm:text-xl" type="text" name="title"
+            placeholder="Enter Post Title" value="<%= post.title %>">
+        <button class="w-full md:w-2/3 bg-purple-400 hover:bg-purple-600 text-white py-3 px-5 rounded-md">Update Post</button>
+    </form>
+</div>
 
-    <%- include('partials/footer') %>
+<script>
+    const inputPostImage = document.querySelector(".inputPostImage");
+    const previewPostImage = document.querySelector(".previewPostImage");
+    const postImage = document.querySelector(".postImage");
+
+    previewPostImage.addEventListener("click", () => {
+        inputPostImage.click();
+    });
+
+    inputPostImage.addEventListener("change", () => {
+        postImage.submit();
+    });
+</script>
+
+<%- include('partials/footer') %>

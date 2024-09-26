@@ -1,22 +1,22 @@
 <%- include('partials/header') %>
-    <div class="bg-white bg-opacity-90 rounded-2xl w-full max-w-md mx-auto p-8 shadow-lg mt-32">
-        <h1 class="bg-blue-200 w-full rounded-xl p-4 text-center text-3xl font-extrabold text-purple-600">
+<div class="bg-white bg-opacity-90 rounded-2xl w-full max-w-md mx-auto p-8 shadow-lg mt-32">
+    <h1 class="bg-blue-200 w-full rounded-xl p-4 text-center text-3xl font-extrabold text-purple-600">
+        Create Post
+    </h1>
+
+    <form class="mt-6" action="/create-post" method="post" enctype="multipart/form-data">
+        <div class="mb-6">
+            <label class="block text-xl mb-2 font-semibold text-gray-700" for="media">Upload Media:</label>
+            <input class="w-full border border-gray-300 p-3 rounded-xl text-lg cursor-pointer" type="file" name="media" id="media" accept="image/*">
+        </div>
+        <div class="mb-6">
+            <label class="block text-xl mb-2 font-semibold text-gray-700" for="title">Post Title:</label>
+            <input class="w-full border border-gray-300 p-3 rounded-xl text-lg" type="text" name="title" id="title" placeholder="Enter Post Title">
+        </div>
+        <button class="w-full text-center bg-purple-400 hover:bg-purple-600 rounded-xl text-white py-3 px-5 transition duration-300 ease-in-out transform hover:scale-105">
             Create Post
-        </h1>
+        </button>
+    </form>
+</div>
 
-        <form class="mt-6" action="/create-post" method="post" enctype="multipart/form-data">
-            <div class="mb-6">
-                <input class="w-full border border-gray-300 p-3 rounded-xl text-xl" type="file" name="media">
-            </div>
-            <div class="mb-6">
-                <input class="w-full border border-gray-300 p-3 rounded-xl text-xl" type="text" name="title"
-                    placeholder="Enter Post Title">
-            </div>
-            <button
-                class="w-full text-center bg-purple-400 hover:bg-purple-600 rounded-xl text-white py-3 px-5 transition duration-300 ease-in-out transform hover:scale-105">
-                Create Post
-            </button>
-        </form>
-    </div>
-
-    <%- include('partials/footer') %>
+<%- include('partials/footer') %>

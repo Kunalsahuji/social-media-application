@@ -1,25 +1,28 @@
 <%- include('partials/header') %>
 
-    <div class="bg-white bg-opacity-90 rounded-2xl w-full max-w-md mx-auto p-8 shadow-lg mt-10">
-        <h1 class="bg-blue-200 w-full rounded-xl p-4 text-center text-3xl font-extrabold text-purple-600">
-            Register User
-        </h1>
+<div class="bg-white bg-opacity-90 rounded-2xl w-full max-w-sm sm:max-w-md mx-auto p-6 sm:p-8 shadow-lg mt-10">
+    <h1 class="bg-blue-200 w-full rounded-xl p-3 sm:p-4 text-center text-2xl sm:text-3xl font-extrabold text-purple-600">
+        Register User
+    </h1>
 
-        <form class="mt-6 text-center" action="/register-user" method="post">
-            <input class="w-full mb-6 border border-gray-300 p-3 rounded-xl text-xl" type="text" name="name"
-                placeholder="Full name">
-            <input class="w-full mb-6 border border-gray-300 p-3 rounded-xl text-xl" type="username" name="username"
-                placeholder="Username">
-            <input class="w-full mb-6 border border-gray-300 p-3 rounded-xl text-xl" type="email" name="email"
-                placeholder="Email">
-            <input class="w-full mb-6 border border-gray-300 p-3 rounded-xl text-xl" type="password" name="password"
-                placeholder="Password">
-            <button
-                class="w-full text-center bg-purple-400 hover:bg-purple-600 rounded-xl text-white py-3 px-5 transition duration-300 ease-in-out transform hover:scale-105">Register</button>
-        </form>
+    <form class="mt-6 text-center" action="/register-user" method="post">
+        <input class="w-full mb-4 sm:mb-6 border border-gray-300 p-2 sm:p-3 rounded-xl text-lg sm:text-xl" type="text"
+            name="name" placeholder="Full name" required>
+        <input class="w-full mb-4 sm:mb-6 border border-gray-300 p-2 sm:p-3 rounded-xl text-lg sm:text-xl" type="text"
+            name="username" placeholder="Username" required>
+        <input class="w-full mb-4 sm:mb-6 border border-gray-300 p-2 sm:p-3 rounded-xl text-lg sm:text-xl" type="email"
+            name="email" placeholder="Email" required>
+        <input class="w-full mb-4 sm:mb-6 border border-gray-300 p-2 sm:p-3 rounded-xl text-lg sm:text-xl" type="password"
+            name="password" placeholder="Password" required>
+        <button
+            class="w-full text-center bg-purple-400 hover:bg-purple-600 rounded-xl text-white py-2 sm:py-3 px-4 sm:px-5 transition duration-300 ease-in-out transform hover:scale-105">
+            Register
+        </button>
+    </form>
 
-        <p class="text-center mt-6">
-            Already have an account? <a class="text-purple-400 hover:text-purple-600" href="/login">Login</a>
-        </p>
-    </div>
-    <%- include('partials/footer') %>
+    <p class="text-center mt-6">
+        Already have an account? <a class="text-purple-400 hover:text-purple-600" href="/login">Login</a>
+    </p>
+</div>
+
+<%- include('partials/footer') %>

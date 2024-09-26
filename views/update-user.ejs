@@ -1,65 +1,64 @@
 <%- include('partials/header')%>
 
-  <div class="flex flex-col md:flex-row w-full max-w-5xl bg-white rounded-xl shadow-lg overflow-hidden mt-5 m-auto">
-    <!-- Profile Section -->
-    <div class="flex flex-col items-center w-full md:w-2/3 p-6">
-      <!-- Profile Header -->
-      <div class="flex flex-col items-center mb-6">
-        <form class="formImage hidden" action="/image/<%= user._id %>" method="post" enctype="multipart/form-data">
-          <input class="inputImage" type="file" name="profilePic">
-        </form>
-        <div class="relative cursor-pointer">
-          <img class="previewImage w-32 h-32 rounded-full object-cover border-4 border-gray-300"
-            src="/images/<%= user.profilePic %>" alt="Profile Picture">
-        </div>
-        <div class="text-center mt-4">
-          <h1 class="text-2xl font-extrabold text-purple-400">
-            <%= user.name %>
-          </h1>
-          <h2 class="text-xl font-bold text-purple-400">@<%= user.username %>
-          </h2>
-        </div>
-      </div>
-
-      <!-- Profile Settings Form -->
-      <h1 class="text-2xl font-bold text-purple-400 mb-4">Profile Settings</h1>
-      <form action="/update-user/<%= user._id %>" method="post" class="space-y-4 R̥">
-        <input class="w-full md:w-1/2 border border-gray-300 p-3 rounded-md text-xl" type="text" placeholder="Full Name"
-          name="name" value="<%= user.name %>">
-        <input class="w-full md:w-1/2 border border-gray-300 p-3 rounded-md text-xl" type="text" placeholder="Username"
-          name="username" value="<%= user.username %>">
-        <input class="w-full md:w-1/2 border border-gray-300 p-3 rounded-md text-xl" type="email" placeholder="Email"
-          name="email" value="<%= user.email %>">
-        <button class="w-full md:w-1/2 bg-purple-400 hover:bg-purple-600 text-white py-3 px-5 rounded-md">Update User
-          Details</button>
+<div class="flex flex-col md:flex-row w-full max-w-5xl bg-white rounded-xl shadow-lg overflow-hidden mt-5 mx-auto">
+  <!-- Profile Section -->
+  <div class="flex flex-col items-center w-full md:w-2/3 p-6">
+    <!-- Profile Header -->
+    <div class="flex flex-col items-center mb-6">
+      <form class="formImage hidden" action="/image/<%= user._id %>" method="post" enctype="multipart/form-data">
+        <input class="inputImage" type="file" name="profilePic">
       </form>
-    </div>
-
-    <!-- Actions Section -->
-    <div class="w-full md:w-1/3 bg-gray-200 p-6 border border-gray-300">
-      <h1 class="text-2xl font-extrabold text-red-400 mb-6 underline">Account Actions</h1>
-      <div class="flex flex-col space-y-4">
-        <a class="text-red-400 font-bold hover:text-red-600 border border-gray-300 rounded-full py-2 px-4 text-center"
-          href="/reset-password/<%= user._id %>">Reset Password</a>
-        <a class="text-red-400 font-bold hover:text-red-600 border border-gray-300 rounded-full py-2 px-4 text-center"
-          href="/delete-user/<%= user._id %>">Delete Profile</a>
-        <a class="text-red-400 font-bold hover:text-red-600 border border-gray-300 rounded-full py-2 px-4 text-center"
-          href="/logout-user/<%= user._id %>">Logout</a>
+      <div class="relative cursor-pointer">
+        <img class="previewImage w-28 h-28 sm:w-32 sm:h-32 rounded-full object-cover border-4 border-gray-300"
+          src="/images/<%= user.profilePic %>" alt="Profile Picture">
+      </div>
+      <div class="text-center mt-4">
+        <h1 class="text-2xl font-extrabold text-purple-400">
+          <%= user.name %>
+        </h1>
+        <h2 class="text-xl font-bold text-purple-400">@<%= user.username %></h2>
       </div>
     </div>
+
+    <!-- Profile Settings Form -->
+    <h1 class="text-2xl font-bold text-purple-400 mb-4">Profile Settings</h1>
+    <form action="/update-user/<%= user._id %>" method="post" class="space-y-4">
+      <input class="w-full md:w-2/3 border border-gray-300 p-3 rounded-md text-lg sm:text-xl" type="text" placeholder="Full Name"
+        name="name" value="<%= user.name %>">
+      <input class="w-full md:w-2/3 border border-gray-300 p-3 rounded-md text-lg sm:text-xl" type="text" placeholder="Username"
+        name="username" value="<%= user.username %>">
+      <input class="w-full md:w-2/3 border border-gray-300 p-3 rounded-md text-lg sm:text-xl" type="email" placeholder="Email"
+        name="email" value="<%= user.email %>">
+      <button class="w-full md:w-2/3 bg-purple-400 hover:bg-purple-600 text-white py-3 px-5 rounded-md">Update User Details</button>
+    </form>
   </div>
 
-  <script>
-    const inputImage = document.querySelector(".inputImage");
-    const previewImage = document.querySelector(".previewImage");
-    const formImage = document.querySelector(".formImage");
+  <!-- Actions Section -->
+  <div class="w-full md:w-1/3 bg-gray-200 p-6 border border-gray-300">
+    <h1 class="text-2xl font-extrabold text-red-400 mb-6 underline">Account Actions</h1>
+    <div class="flex flex-col space-y-4">
+      <a class="text-red-400 font-bold hover:text-red-600 border border-gray-300 rounded-full py-2 px-4 text-center"
+        href="/reset-password/<%= user._id %>">Reset Password</a>
+      <a class="text-red-400 font-bold hover:text-red-600 border border-gray-300 rounded-full py-2 px-4 text-center"
+        href="/delete-user/<%= user._id %>">Delete Profile</a>
+      <a class="text-red-400 font-bold hover:text-red-600 border border-gray-300 rounded-full py-2 px-4 text-center"
+        href="/logout-user/<%= user._id %>">Logout</a>
+    </div>
+  </div>
+</div>
 
-    previewImage.addEventListener("click", () => {
-      inputImage.click();
-    });
+<script>
+  const inputImage = document.querySelector(".inputImage");
+  const previewImage = document.querySelector(".previewImage");
+  const formImage = document.querySelector(".formImage");
 
-    inputImage.addEventListener("change", () => {
-      formImage.submit();
-    });
-  </script>
-  <%- include('partials/footer')%>
+  previewImage.addEventListener("click", () => {
+    inputImage.click();
+  });
+
+  inputImage.addEventListener("change", () => {
+    formImage.submit();
+  });
+</script>
+
+<%- include('partials/footer')%>
